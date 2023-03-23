@@ -21,4 +21,4 @@ const palletteColors = atom(
   }
 );
 
-export const usePalleteColors = () => useAtom(palletteColors);
+export const usePalletteColors = () => useAtom(palletteColors);

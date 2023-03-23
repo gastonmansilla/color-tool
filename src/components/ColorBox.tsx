@@ -2,7 +2,7 @@ import styles from "./ColorBox.module.css";
 import { CgCloseO } from "react-icons/cg";
 import { ImHeart } from "react-icons/im";
 import { IoCopy as FaCopy } from "react-icons/io5";
-import { usePalleteColors } from "../stores/palletteColors";
+import { usePalletteColors } from "../stores/palletteColors";
 export type ColorBoxProps = {
   actions?: ("add-to-pallette" | "copy-to-clipboard")[];
   colors: string[];
@@ -16,7 +16,7 @@ export const ColorBox = ({
   actions,
   onCopy,
 }: ColorBoxProps) => {
-  const [, setPallette] = usePalleteColors();
+  const [, setPallette] = usePalletteColors();
 
   const onFavClick = (color: string) => {
     setPallette({ add: color });

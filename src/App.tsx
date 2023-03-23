@@ -1,27 +1,18 @@
 import "./App.css";
 import { Tones } from "./components/Tones";
-import { usePalleteColors } from "./stores/palletteColors";
+import { usePalletteColors } from "./stores/palletteColors";
 import { ImHeart } from "react-icons/im";
 import { ColorBox } from "./components/ColorBox";
+import { Pallette } from "./components/Pallette";
 
 function App() {
-  const [palletteColors, setPalletteColors] = usePalleteColors();
-
-  const onRemoveColor = (color: string) => {
-    setPalletteColors({ remove: color });
-  };
-
-  const onCopyColor = (color: string) => {
-    console.log(color);
-  };
-
   return (
     <>
       <main>
         <h1>Color tool</h1>
         <section className="jewel">
           <h2>Jewel tones</h2>
-          <Tones saturationRange={[73, 83]} brightnessRange={[56, 76]} />{" "}
+          <Tones saturationRange={[73, 83]} brightnessRange={[56, 76]} />
         </section>
         <section>
           <h2>Pastel tones</h2>
@@ -29,19 +20,19 @@ function App() {
         </section>
         <section>
           <h2>Earth tones</h2>
-          <Tones saturationRange={[36, 41]} brightnessRange={[36, 77]} />{" "}
+          <Tones saturationRange={[36, 41]} brightnessRange={[36, 77]} />
         </section>
         <section>
           <h2>Neutral tones</h2>
-          <Tones saturationRange={[1, 10]} brightnessRange={[99, 70]} />{" "}
+          <Tones saturationRange={[1, 10]} brightnessRange={[99, 70]} />
         </section>
         <section>
           <h2>Fluorescent tones</h2>
-          <Tones saturationRange={[100, 63]} brightnessRange={[100, 82]} />{" "}
+          <Tones saturationRange={[100, 63]} brightnessRange={[100, 82]} />
         </section>
         <section>
           <h2>Shades</h2>
-          <Tones saturationRange={[0, 0]} brightnessRange={[0, 100]} />{" "}
+          <Tones saturationRange={[0, 0]} brightnessRange={[0, 100]} />
         </section>
       </main>
       <div className="pallette">
@@ -54,12 +45,7 @@ function App() {
             </p>
           </section>
           <div>
-            <ColorBox
-              colors={palletteColors}
-              onRemove={onRemoveColor}
-              onCopy={onCopyColor}
-              actions={["copy-to-clipboard"]}
-            />
+            <Pallette />
           </div>
         </div>
       </div>
