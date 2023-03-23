@@ -1,0 +1,25 @@
+:root {
+  --preview-size: 5rem;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+.controls p {
+  margin: 0;
+}
+
+.preview {
+  height: var(--preview-size);
+  width: var(--preview-size);
+  position: relative;
+  border: 1px solid #3d3d3d;
+}
+
+.colorBox {
+  border-radius: 50%;
+}

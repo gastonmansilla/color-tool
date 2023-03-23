@@ -1,0 +1,50 @@
+:root {
+  --selected-size: 5rem;
+}
+
+.colorBox {
+  border-radius: 50%;
+}
+
+.selectedColor {
+  height: var(--selected-size);
+  width: var(--selected-size);
+  position: relative;
+  cursor: pointer;
+  transition: all 200ms ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.selectedColor:hover {
+  z-index: 1;
+  border: 2px solid #3d3d3d;
+  transform: scale(1.2);
+}
+.selectedColor:hover .removeButton,
+.selectedColor:hover .favButton {
+  display: block;
+}
+
+.selectedColorContainer {
+  width: calc(var(--selected-size) * 0.6);
+}
+
+.removeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+  display: none;
+  font-size: larger;
+  background-color: white;
+  color: #3d3d3d;
+}
+
+.favButton {
+  color: inherit;
+  font-size: 1.5rem;
+  filter: sepia();
+  display: none;
+}

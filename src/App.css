@@ -1,0 +1,38 @@
+main {
+  max-width: 800px;
+  width: 100%;
+}
+
+section {
+  width: 100%;
+}
+
+.pallette {
+  position: sticky;
+  bottom: 0;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  border-top: solid 1px #3d3d3d;
+}
+
+.pallette .content {
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.pallette .content section {
+  width: 40%;
+}
+
+.pallette .content h1,
+.pallette .content p {
+  margin: 0.5rem 0;
+}

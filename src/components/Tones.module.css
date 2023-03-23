@@ -1,0 +1,25 @@
+.rowContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.row {
+  display: flex;
+}
+
+.square {
+  flex: 1;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.square p {
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+}
