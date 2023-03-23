@@ -1,6 +1,5 @@
 import { useMemo } from "react";
-import { hsbToRgb, rgbToHex, steps } from "../utils";
-import { ColorRange } from "./ColorRange";
+import { hsbToHex, steps } from "../utils";
 import { Picker } from "./Picker";
 import styles from "./Tones.module.css";
 
@@ -29,7 +28,12 @@ export const Tones = ({ saturationRange, brightnessRange }: TonesProps) => {
     () =>
       Array.from({ length: totalRows }).map((_, rowIndex) => {
         return Array.from({ length: totalColumns }).map((_, columnIndex) => {
-          return [hues[columnIndex], saturations[rowIndex], brights[rowIndex]]; // [hue, saturation, brightness]
+          const rgb = hsbToHex(
+            hues[columnIndex],
+            saturations[rowIndex],
+            brights[rowIndex]
+          );
+          return `#${rgb}`;
         });
       }),
     [totalRows, totalColumns, hues, saturations, brights]
@@ -37,33 +41,6 @@ export const Tones = ({ saturationRange, brightnessRange }: TonesProps) => {
 
   return (
     <div className={styles.rowContainer}>
-      {false &&
-        matrix.map((columns, rowIndex) => {
-          const colors = columns.map(([_h, _s, _b]) => {
-            const [r, g, b] = hsbToRgb(_h, _s, _b);
-            const hex = rgbToHex(r, g, b);
-            return `#${hex}`;
-          });
-
-          return (
-            <div key={rowIndex}>
-              <div className={styles.row}>
-                {colors.map((color, columnIndex) => {
-                  return (
-                    <div
-                      key={columnIndex}
-                      className={styles.square}
-                      style={{ backgroundColor: color }}
-                    >
-                      {/* <p>{color}</p> */}
-                    </div>
-                  );
-                })}
-              </div>
-              <ColorRange colors={colors} />
-            </div>
-          );
-        })}
       <Picker matrix={matrix} />
     </div>
   );

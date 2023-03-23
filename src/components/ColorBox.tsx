@@ -23,7 +23,6 @@ export const ColorBox = ({
   };
 
   const onCopyClick = (color: string) => {
-    color = color.toUpperCase();
     navigator.clipboard.writeText(color);
     onCopy(color);
   };
@@ -37,7 +36,7 @@ export const ColorBox = ({
       }}
     >
       {colors.map((color) => (
-        <div className={styles.selectedColorContainer}>
+        <div className={styles.selectedColorContainer} key={color}>
           <div
             key={color}
             style={{ backgroundColor: color, color }}

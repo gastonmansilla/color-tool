@@ -1,24 +1,19 @@
 import { MouseEventHandler, useEffect, useRef, useState } from "react";
-import { hsbToRgb, rgbToHex } from "../utils";
+import { rgbToHex } from "../utils";
 import styles from "./Picker.module.css";
-import { CgCloseO } from "react-icons/cg";
-import { ImHeart } from "react-icons/im";
-import { IoCopy as FaCopy } from "react-icons/io5";
-import { usePalleteColors } from "../stores/palletteColors";
 import { ColorBox } from "./ColorBox";
 const PICKER_HEIGHT = 256;
 const PICKER_WIDTH = 256;
 const MAX_SELECTION = 8;
 
 export type PickerProps = {
-  matrix: number[][][];
+  matrix: string[][];
 };
 
 export function Picker({ matrix }: PickerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [previewColor, setPreviewColor] = useState("");
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
-  const [, setPallette] = usePalleteColors();
   const [lastSelected, setLastSelected] = useState("");
 
   useEffect(() => {
@@ -30,11 +25,7 @@ export function Picker({ matrix }: PickerProps) {
     }
 
     for (let rowIndex = 0; rowIndex < matrix.length; rowIndex++) {
-      const column = matrix[rowIndex];
-      const colors = column.map(([_h, _s, _b]) => {
-        const [r, g, b] = hsbToRgb(_h, _s, _b);
-        return `#${rgbToHex(r, g, b)}`;
-      });
+      const colors = matrix[rowIndex];
 
       const gradient = ctx.createLinearGradient(0, 0, PICKER_WIDTH, 0);
 
@@ -141,44 +132,12 @@ export function Picker({ matrix }: PickerProps) {
           )}
         </div>
         <p>Selected colors</p>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-          }}
-        >
-          {/* {selectedColors.map((color) => (
-            <div className={styles.selectedColorContainer}>
-              <div
-                key={color}
-                style={{ backgroundColor: color, color }}
-                className={`${styles.selectedColor} ${styles.colorBox}`}
-              >
-                <CgCloseO
-                  className={styles.removeButton}
-                  onClick={() => {
-                    onRemoveClick(color);
-                  }}
-                  fill="red"
-                />
-                <ImHeart
-                  className={styles.favButton}
-                  onClick={() => onFavClick(color)}
-                />
-                <FaCopy
-                  className={styles.favButton}
-                  onClick={() => onCopyClick(color)}
-                />
-              </div>
-            </div>
-          ))} */}
-          <ColorBox
-            colors={selectedColors}
-            onCopy={setLastSelected}
-            onRemove={onRemoveClick}
-          />
-        </div>
+
+        <ColorBox
+          colors={selectedColors}
+          onCopy={setLastSelected}
+          onRemove={onRemoveClick}
+        />
       </div>
     </div>
   );

@@ -8,10 +8,15 @@ export const hsbToRgb = (h: number, s: number, b: number) => {
 };
 
 export const numberToHexString = (n: number) =>
-  Math.floor(n).toString(16).padStart(2, "0");
+  Math.floor(n).toString(16).padStart(2, "0").toUpperCase();
 
 export const rgbToHex = (r: number, g: number, b: number) =>
   `${numberToHexString(r)}${numberToHexString(g)}${numberToHexString(b)}`;
+
+export const hsbToHex = (h: number, s: number, b: number) => {
+  const [red, green, blue] = hsbToRgb(h, s, b);
+  return rgbToHex(red, green, blue);
+};
 
 export const stepSize = (range: [number, number], steps: number) =>
   (range[1] - range[0]) / steps;

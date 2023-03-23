@@ -7,7 +7,7 @@ const palletteColors = atom(
   (get, set, update: { add?: string; remove?: string }) => {
     const current = get(palletteColorsAtom);
     if (update.add) {
-      const newColor = update.add.toUpperCase();
+      const newColor = update.add;
       if (!current.includes(newColor)) {
         set(palletteColorsAtom, [...current, newColor]);
       }
@@ -15,7 +15,7 @@ const palletteColors = atom(
     if (update.remove) {
       set(
         palletteColorsAtom,
-        current.filter((color) => color !== update.remove?.toUpperCase())
+        current.filter((color) => color !== update.remove)
       );
     }
   }

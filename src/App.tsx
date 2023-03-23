@@ -1,5 +1,4 @@
 import "./App.css";
-import { ColorRange } from "./components/ColorRange";
 import { Tones } from "./components/Tones";
 import { usePalleteColors } from "./stores/palletteColors";
 import { ImHeart } from "react-icons/im";
