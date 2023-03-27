@@ -5,16 +5,18 @@ import styles from "./Tones.module.css";
 
 const totalRows = 256;
 const totalColumns = 256;
-const hueRange: [number, number] = [0, 360];
-
-const hues = steps(hueRange, totalColumns);
 
 export type TonesProps = {
   saturationRange: [number, number];
   brightnessRange: [number, number];
+  hueRange: [number, number];
 };
 
-export const Tones = ({ saturationRange, brightnessRange }: TonesProps) => {
+export const Tones = ({
+  saturationRange,
+  brightnessRange,
+  hueRange,
+}: TonesProps) => {
   const saturations = useMemo(
     () => steps(saturationRange, totalRows),
     [saturationRange, totalRows]
@@ -22,6 +24,11 @@ export const Tones = ({ saturationRange, brightnessRange }: TonesProps) => {
   const brights = useMemo(
     () => steps(brightnessRange, totalRows),
     [brightnessRange, totalRows]
+  );
+
+  const hues = useMemo(
+    () => steps(hueRange, totalColumns),
+    [hueRange, totalColumns]
   );
 
   const matrix = useMemo(

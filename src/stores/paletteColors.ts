@@ -1,24 +1,24 @@
 import { atom, useAtom } from "jotai";
 
-const palletteColorsAtom = atom<string[]>([]);
+const paletteColorsAtom = atom<string[]>([]);
 
-const palletteColors = atom(
-  (get) => get(palletteColorsAtom),
+const paletteColors = atom(
+  (get) => get(paletteColorsAtom),
   (get, set, update: { add?: string; remove?: string }) => {
-    const current = get(palletteColorsAtom);
+    const current = get(paletteColorsAtom);
     if (update.add) {
       const newColor = update.add;
       if (!current.includes(newColor)) {
-        set(palletteColorsAtom, [...current, newColor]);
+        set(paletteColorsAtom, [...current, newColor]);
       }
     }
     if (update.remove) {
       set(
-        palletteColorsAtom,
+        paletteColorsAtom,
         current.filter((color) => color !== update.remove)
       );
     }
   }
 );
 
-export const usePalletteColors = () => useAtom(palletteColors);
+export const usePaletteColors = () => useAtom(paletteColors);

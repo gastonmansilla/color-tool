@@ -7,7 +7,7 @@ section {
   width: 100%;
 }
 
-.pallette {
+.palette {
   position: sticky;
   bottom: 0;
   background-color: #f5f5f5;
@@ -19,7 +19,7 @@ section {
   border-top: solid 1px #3d3d3d;
 }
 
-.pallette .content {
+.palette .content {
   max-width: 800px;
   width: 100%;
   display: flex;
@@ -28,11 +28,11 @@ section {
   margin: 0.5rem 0;
 }
 
-.pallette .content section {
+.palette .content section {
   width: 40%;
 }
 
-.pallette .content h1,
-.pallette .content p {
+.palette .content h1,
+.palette .content p {
   margin: 0.5rem 0;
 }

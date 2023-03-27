@@ -1,7 +1,7 @@
 import { MouseEventHandler, useEffect, useRef, useState } from "react";
 import { rgbToHex } from "../utils";
 import styles from "./Picker.module.css";
-import { ColorBox } from "./ColorBox";
+import { ColorBox, ColorBoxRef } from "./ColorBox";
 const PICKER_HEIGHT = 256;
 const PICKER_WIDTH = 256;
 const MAX_SELECTION = 8;
@@ -15,6 +15,7 @@ export function Picker({ matrix }: PickerProps) {
   const [previewColor, setPreviewColor] = useState("");
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
   const [lastSelected, setLastSelected] = useState("");
+  const colorBoxRef = useRef<ColorBoxRef>(null);
 
   useEffect(() => {
     const ctx = canvasRef.current?.getContext("2d", {
@@ -41,7 +42,17 @@ export function Picker({ matrix }: PickerProps) {
       ctx.fillStyle = gradient;
       ctx.fillRect(0, yPosition, PICKER_WIDTH, gradientHeight);
     }
-  }, [canvasRef.current]);
+    return () => {
+      if (canvasRef.current) {
+        ctx.clearRect(
+          0,
+          0,
+          canvasRef.current!.width,
+          canvasRef.current!.height
+        );
+      }
+    };
+  }, [canvasRef.current, matrix]);
 
   const onCanvasMouseMove: MouseEventHandler<HTMLCanvasElement> = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -131,12 +142,27 @@ export function Picker({ matrix }: PickerProps) {
             </div>
           )}
         </div>
-        <p>Selected colors</p>
+        <div className={styles.selectedColors}>
+          <p>Selected colors</p>
+          {selectedColors.length > 0 && (
+            <p
+              className={styles.copy}
+              onClick={() => {
+                if (colorBoxRef.current) {
+                  colorBoxRef.current.copyImage();
+                }
+              }}
+            >
+              Copy image
+            </p>
+          )}
+        </div>
 
         <ColorBox
           colors={selectedColors}
           onCopy={setLastSelected}
           onRemove={onRemoveClick}
+          ref={colorBoxRef}
         />
       </div>
     </div>
