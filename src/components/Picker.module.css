@@ -23,3 +23,13 @@
 .colorBox {
   border-radius: 50%;
 }
+
+.selectedColors {
+  display: flex;
+  gap: 1rem;
+}
+
+.selectedColors .copy {
+  text-decoration: underline;
+  cursor: pointer;
+}
