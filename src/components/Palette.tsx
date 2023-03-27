@@ -1,11 +1,11 @@
-import { usePalletteColors } from "../stores/palletteColors";
+import { usePaletteColors } from "../stores/paletteColors";
 import { ColorBox } from "./ColorBox";
 
-export const Pallette = () => {
-  const [palletteColors, setPalletteColors] = usePalletteColors();
+export const Palette = () => {
+  const [paletteColors, setPaletteColors] = usePaletteColors();
 
   const onRemoveColor = (color: string) => {
-    setPalletteColors({ remove: color });
+    setPaletteColors({ remove: color });
   };
 
   const onCopyColor = (color: string) => {
@@ -14,7 +14,7 @@ export const Pallette = () => {
 
   return (
     <ColorBox
-      colors={palletteColors}
+      colors={paletteColors}
       onRemove={onRemoveColor}
       onCopy={onCopyColor}
       actions={["copy-to-clipboard"]}

@@ -1,9 +1,9 @@
 import "./App.css";
 import { Tones } from "./components/Tones";
-import { usePalletteColors } from "./stores/palletteColors";
+import { usePaletteColors } from "./stores/paletteColors";
 import { ImHeart } from "react-icons/im";
 import { ColorBox } from "./components/ColorBox";
-import { Pallette } from "./components/Pallette";
+import { Palette } from "./components/Palette";
 
 function App() {
   return (
@@ -35,17 +35,17 @@ function App() {
           <Tones saturationRange={[0, 0]} brightnessRange={[0, 100]} />
         </section>
       </main>
-      <div className="pallette">
+      <div className="palette">
         <div className="content">
           <section>
-            <h1>Pallette</h1>
+            <h1>Palette</h1>
             <p>
-              Select colors from any picker and add them to the pallette
-              clicking on the <ImHeart />
+              Select colors from any picker and add them to the palette clicking
+              on the <ImHeart />
             </p>
           </section>
           <div>
-            <Pallette />
+            <Palette />
           </div>
         </div>
       </div>
