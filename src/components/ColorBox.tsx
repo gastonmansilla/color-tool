@@ -4,6 +4,7 @@ import { ImHeart } from "react-icons/im";
 import { IoCopy as FaCopy } from "react-icons/io5";
 import { usePaletteColors } from "../stores/paletteColors";
 import { useEffect, useRef, forwardRef, useImperativeHandle } from "react";
+import { getContrastColor } from "../utils";
 export type ColorBoxProps = {
   actions?: ("add-to-palette" | "copy-to-clipboard")[];
   colors: string[];
@@ -94,35 +95,38 @@ export const ColorBox = forwardRef(
             position: "relative",
           }}
         >
-          {colors.map((color) => (
-            <div className={styles.selectedColorContainer} key={color}>
-              <div
-                key={color}
-                style={{ backgroundColor: color, color }}
-                className={`${styles.selectedColor} ${styles.colorBox}`}
-              >
-                <CgCloseO
-                  className={styles.removeButton}
-                  onClick={() => {
-                    onRemove(color);
-                  }}
-                  fill="red"
-                />
-                {(!actions || actions.includes("add-to-palette")) && (
-                  <ImHeart
-                    className={styles.favButton}
-                    onClick={() => onFavClick(color)}
+          {colors.map((color) => {
+            const contrastColor = getContrastColor(color);
+            return (
+              <div className={styles.selectedColorContainer} key={color}>
+                <div
+                  key={color}
+                  style={{ backgroundColor: color, color: contrastColor }}
+                  className={`${styles.selectedColor} ${styles.colorBox}`}
+                >
+                  <CgCloseO
+                    className={styles.removeButton}
+                    onClick={() => {
+                      onRemove(color);
+                    }}
+                    fill="red"
                   />
-                )}
-                {(!actions || actions.includes("copy-to-clipboard")) && (
-                  <FaCopy
-                    className={styles.favButton}
-                    onClick={() => onCopyClick(color)}
-                  />
-                )}
+                  {(!actions || actions.includes("add-to-palette")) && (
+                    <ImHeart
+                      className={styles.favButton}
+                      onClick={() => onFavClick(color)}
+                    />
+                  )}
+                  {(!actions || actions.includes("copy-to-clipboard")) && (
+                    <FaCopy
+                      className={styles.favButton}
+                      onClick={() => onCopyClick(color)}
+                    />
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
           <div
             style={{
               width: "100vw",
